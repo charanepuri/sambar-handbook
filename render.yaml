@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: sambar-handbook
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn sambar_handbook.wsgi:application"
