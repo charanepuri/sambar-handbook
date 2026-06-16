@@ -1,0 +1,35 @@
+{% extends 'handbook/base.html' %}
+
+{% block content %}
+<title>{% block title %}Ingredient Details Page|| Sambar Handbook{% endblock %}</title>
+<div class="container">
+
+    <h2>
+        {{ ingredient.name }}
+    </h2>
+
+    {% if ingredient.image %}
+    <img src="{{ ingredient.image.url }}"
+         class="img-fluid mb-4"
+         width="400">
+    {% endif %}
+
+    <p>
+        <strong>Category:</strong>
+        {{ ingredient.category }}
+    </p>
+
+    <p>
+        {{ ingredient.description }}
+    </p>
+
+    <a href="{% url 'ingredients' %}"
+       class="btn btn-success">
+
+        Back to Ingredients
+
+    </a>
+
+</div>
+
+{% endblock %}

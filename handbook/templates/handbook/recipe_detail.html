@@ -1,0 +1,54 @@
+{% extends 'handbook/base.html' %}
+
+{% block content %}
+<title>{% block title %}Recipe Details Page|| Sambar Handbook{% endblock %}</title>
+    <h2>
+        {{ recipe.title }}
+    </h2>
+
+    {% if recipe.image %}
+        <img src="{{ recipe.image.url }}" class="img-fluid mb-4 rounded shadow-sm" alt="{{ recipe.title }}">
+    {% endif %}
+
+    <div class="recipe-meta mb-4">
+
+        <p class="mb-1">
+            <strong>Preparation Time:</strong>
+            {{ recipe.preparation_time }} mins
+        </p>
+
+        <p class="mb-1">
+            <strong>Cooking Time:</strong>
+            {{ recipe.cooking_time }} mins
+        </p>
+
+        <p class="mb-1">
+            <strong>Difficulty:</strong>
+            {{ recipe.difficulty }}
+        </p>
+
+    </div>
+
+    <h4>Ingredients</h4>
+
+    <ul class="mb-4">
+
+        {% for ingredient in recipe.ingredients.all %}
+            <li>
+                {{ ingredient.name }}
+            </li>
+        {% endfor %}
+
+    </ul>
+
+    <h4>Instructions</h4>
+
+    <div class="instructions-content" style="line-height: 1.8;">
+        
+        <p>
+            {{ recipe.instructions }}
+        </p>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'handbook/base.html' %}
+
+{% block content %}
+<title>{% block title %}Variety Details Page|| Sambar Handbook{% endblock %}</title>
+<div class="container">
+
+    <h2>
+        {{ variety.variety_name }}
+    </h2>
+
+    <hr>
+
+    <p>
+        <strong>State:</strong>
+        {{ variety.state }}
+    </p>
+
+    <p>
+        <strong>Spice Level:</strong>
+        {{ variety.spice_level }}
+    </p>
+
+    <p>
+        <strong>Sweetness:</strong>
+        {{ variety.sweetness }}
+    </p>
+
+    <p>
+        <strong>Coconut Usage:</strong>
+        {{ variety.coconut_usage }}
+    </p>
+
+    <p>
+        {{ variety.description }}
+    </p>
+
+    <a href="{% url 'varieties' %}"
+       class="btn btn-success">
+
+        Back to Varieties
+
+    </a>
+
+</div>
+
+{% endblock %}

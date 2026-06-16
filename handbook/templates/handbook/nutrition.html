@@ -1,0 +1,59 @@
+{% extends 'handbook/base.html' %}
+
+{% block content %}
+<title>{% block title %}Nutrition Page|| Sambar Handbook{% endblock %}</title>
+    <h2>Nutrition Information</h2>
+
+    <div class="table-responsive">
+
+        <table class="table table-bordered table-striped">
+
+            <thead class="table-light">
+
+                <tr>
+                    <th>Recipe</th>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                    <th>Carbohydrates</th>
+                    <th>Fiber</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for item in nutrition %}
+
+                    <tr>
+
+                        <td>
+                            {{ item.recipe.title }}
+                        </td>
+
+                        <td>
+                            {{ item.calories }}
+                        </td>
+
+                        <td>
+                            {{ item.protein }}
+                        </td>
+
+                        <td>
+                            {{ item.carbohydrates }}
+                        </td>
+
+                        <td>
+                            {{ item.fiber }}
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+{% endblock %}

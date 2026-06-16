@@ -1,0 +1,58 @@
+{% extends 'handbook/base.html' %}
+
+{% block content %}
+<title>{% block title %}Ingredients Page|| Sambar Handbook{% endblock %}</title>
+<h2 class="mb-4">
+    Ingredients Database
+</h2>
+
+<div class="row">
+
+    {% for ingredient in ingredients %}
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card shadow h-100">
+
+            {% if ingredient.image %}
+            <img src="{{ ingredient.image.url }}"
+                 class="card-img-top"
+                 alt="{{ ingredient.name }}">
+            {% endif %}
+
+            <div class="card-body">
+
+                <h5>
+                    {{ ingredient.name }}
+                </h5>
+
+                <span class="badge bg-success">
+                    {{ ingredient.category }}
+                </span>
+
+                <p class="mt-3">
+                    {{ ingredient.description|truncatewords:20 }}
+                </p>
+
+                <a href="{% url 'ingredient_detail' ingredient.id %}"
+                   class="btn btn-outline-success">
+
+                    View Details
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <p>No ingredients available.</p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

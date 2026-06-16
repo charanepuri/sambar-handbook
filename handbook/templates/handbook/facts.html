@@ -1,0 +1,43 @@
+{% extends 'handbook/base.html' %}
+
+{% block content %}
+<title>{% block title %}Facts Page|| Sambar Handbook{% endblock %}</title>
+    <h2>Facts</h2>
+
+    {% for fact in facts %}
+
+        <div class="alert alert-success">
+
+            <strong>
+                {{ fact.title }}
+            </strong>
+
+            <p class="mb-0 mt-1">
+                {{ fact.description }}
+            </p>
+
+        </div>
+
+    {% endfor %}
+
+    <hr class="my-5">
+
+    <h2>Fun Facts</h2>
+
+    {% for fact in fun_facts %}
+
+        <div class="alert alert-warning">
+
+            <strong>
+                {{ fact.title }}
+            </strong>
+
+            <p class="mb-0 mt-1">
+                {{ fact.description }}
+            </p>
+
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'handbook/base.html' %}
+
+{% block content %}
+
+    <h2>
+        Search Results for "{{ query }}"
+    </h2>
+
+    <hr>
+
+    <h4>Recipes</h4>
+
+    {% for recipe in recipes %}
+        
+        <p>{{ recipe.title }}</p>
+
+    {% empty %}
+        
+        <p class="text-muted">No recipes found.</p>
+
+    {% endfor %}
+
+    <hr>
+
+    <h4>Ingredients</h4>
+
+    {% for ingredient in ingredients %}
+        
+        <p>{{ ingredient.name }}</p>
+
+    {% empty %}
+        
+        <p class="text-muted">No ingredients found.</p>
+
+    {% endfor %}
+
+{% endblock %}

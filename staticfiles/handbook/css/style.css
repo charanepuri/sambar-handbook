@@ -1,0 +1,41 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.card {
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+footer {
+    margin-top: 100px;
+}
+
+.hero {
+    height: 500px;
+    background-image:
+    url('../images/banner.jpg');
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-content {
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+}

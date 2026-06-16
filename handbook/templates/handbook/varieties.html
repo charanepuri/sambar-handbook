@@ -1,0 +1,39 @@
+{% extends 'handbook/base.html' %}
+
+{% block content %}
+<title>{% block title %}Varieties Page|| Sambar Handbook{% endblock %}</title>
+    <h2>State-wise Varieties</h2>
+
+    <div class="row g-4">
+
+        {% for variety in varieties %}
+
+            <div class="col-md-4">
+
+                <div class="card shadow p-3 h-100">
+
+                    <h4>
+                        {{ variety.variety_name }}
+                    </h4>
+
+                    <p class="mb-1">
+                        <strong>State:</strong> {{ variety.state }}
+                    </p>
+
+                    <p class="mb-3">
+                        <strong>Spice Level:</strong> {{ variety.spice_level }}
+                    </p>
+
+                    <a href="{% url 'variety_detail' variety.id %}" class="btn btn-success mt-auto">
+                        Read More
+                    </a>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
