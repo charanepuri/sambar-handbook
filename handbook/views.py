@@ -63,7 +63,7 @@ def ingredients(request):
 
 def recipes(request):
     state_filter = request.GET.get('state')
-    recipe_list = Recipe.objects.select_related('state').all()
+    recipe_list = Recipe.objects.select_related('state').all().order_by('id')
 
     if state_filter:
         recipe_list = recipe_list.filter(state__state=state_filter)
