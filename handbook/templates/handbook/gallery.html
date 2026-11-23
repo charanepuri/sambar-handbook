@@ -1,34 +1,52 @@
 {% extends 'handbook/base.html' %}
 
-{% block title %}Gallery Page- Sambar Handbook{% endblock %}
+{% block title %}Image Gallery - Sambar Handbook{% endblock %}
 
 {% block content %}
-    <h2>Image Gallery</h2>
+    <h2 class="mb-4 section-header">Image Gallery</h2>
 
-    <div class="row g-4">
+    <div class="row justify-content-center mb-5">
 
         {% for image in images %}
 
-            <div class="col-md-4">
+            <div class="col-lg-10 col-md-12">
 
-                <div class="card shadow h-100">
+                <div class="card shadow p-3 border-0">
 
-                    <img src="{{ image.image.url }}" class="card-img-top" alt="{{ image.title }}">
+                    {% if image.image %}
+                        <a href="{{ image.image.url }}" target="_blank" title="Click to view full resolution">
+                            <img src="{{ image.image.url }}" class="img-fluid rounded shadow-sm w-100" alt="{{ image.title }}" style="max-height: 800px; object-fit: contain; background: #ffffff;">
+                        </a>
+                    {% endif %}
 
-                    <div class="card-body">
+                    <div class="card-body text-center pt-4">
 
-                        <h5>
+                        <h4 class="card-title fw-bold">
                             {{ image.title }}
-                        </h5>
+                        </h4>
 
-                        <p class="text-muted mb-0">
-                            {{ image.category }}
+                        <div class="mt-2 mb-3">
+                            <span class="badge badge-tag fs-6">
+                                {{ image.category }}
+                            </span>
+                        </div>
+
+                        <p class="text-muted small">
+                            <i class="bi bi-arrows-fullscreen me-1"></i> Click on the image to view or download full resolution.
                         </p>
 
                     </div>
 
                 </div>
 
+            </div>
+
+        {% empty %}
+
+            <div class="col-12">
+                <div class="alert alert-info">
+                    No images available in the gallery.
+                </div>
             </div>
 
         {% endfor %}
