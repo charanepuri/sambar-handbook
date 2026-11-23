@@ -7,7 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Explore the history, recipes, ingredients and nutrition of South India's favorite dish - Sambar." >
 
-    <title>{% block title %} Sambar Handbook{% endblock %}</title>
+    <title>{% block title %}Sambar Handbook{% endblock %}</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     {% load static %}
 
@@ -20,20 +25,20 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top">
         <div class="container">
 
             <a class="navbar-brand" href="/">
-                🥣 Sambar Handbook
+                <span class="fs-4">🥣</span> Sambar Handbook
             </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="menu">
 
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
 
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
@@ -52,7 +57,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'nutrition' %}">Nutrients</a>
+                        <a class="nav-link" href="{% url 'nutrition' %}">Nutrition</a>
                     </li>
 
                     <li class="nav-item">
@@ -60,7 +65,15 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'gallery' %}">Gallery</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'facts' %}">Facts</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tips' %}">Tips</a>
                     </li>
 
                     <li class="nav-item">
@@ -69,6 +82,15 @@
 
                 </ul>
 
+                <!-- Header Search Bar -->
+                <form class="d-flex" action="{% url 'search' %}" method="GET">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control search-input-header" type="search" name="q" placeholder="Search recipes, spices..." aria-label="Search">
+                        <button class="btn search-btn-header" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
 
             </div>
 
@@ -80,87 +102,128 @@
         {% endblock %}
     </div>
 
-    <footer class="bg-dark text-white mt-5 p-5">
+    <footer class="mt-5 pt-5 pb-4">
         <div class="container">
-            <div class="row">
 
-                <div class="col-md-4">
-                    <h4>🥣 Sambar Handbook</h4>
-                    <p class="text-secondary">
-                        Explore South India's most beloved dish.
+            <!-- Top Center: Project Name along with Tagline -->
+            <div class="text-center mb-5 pb-3 border-bottom border-secondary border-opacity-25">
+                <h3 class="fw-bold mb-2 text-warning">🥣 Sambar Handbook</h3>
+                <p class="text-light-emphasis mb-0 fs-5">
+                    A Culinary Guide to South India's Most Iconic and Flavorful Dish
+                </p>
+            </div>
+
+            <!-- Main Footer 3 Columns -->
+            <div class="row g-4 justify-content-between">
+
+                <!-- Left Side: About & Tech Stack -->
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="text-warning mb-3">About</h4>
+                    <p class="mb-2">
+                        © 2026 Built by <strong>Epuri Charan Teja</strong>
                     </p>
+                    <p class="text-light-emphasis small mb-3">
+                        Dedicated to preserving, documenting, and sharing the diverse regional varieties, rich heritage, and authentic recipes of Sambar across South India.
+                    </p>
+
+                    <h6 class="text-warning text-uppercase fw-semibold small mb-2">Technologies Used</h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-secondary bg-opacity-25 text-light border border-secondary border-opacity-50">Python</span>
+                        <span class="badge bg-secondary bg-opacity-25 text-light border border-secondary border-opacity-50">Django</span>
+                        <span class="badge bg-secondary bg-opacity-25 text-light border border-secondary border-opacity-50">SQLite</span>
+                        <span class="badge bg-secondary bg-opacity-25 text-light border border-secondary border-opacity-50">HTML5 & CSS3</span>
+                        <span class="badge bg-secondary bg-opacity-25 text-light border border-secondary border-opacity-50">Bootstrap 5</span>
+                        <span class="badge bg-secondary bg-opacity-25 text-light border border-secondary border-opacity-50">WhiteNoise</span>
+                        <span class="badge bg-secondary bg-opacity-25 text-light border border-secondary border-opacity-50">Gunicorn</span>
+                    </div>
                 </div>
 
-                <div class="col-md-4">
-                    <h4>Quick Links</h4>
+                <!-- Middle: Project Repository & Documentation -->
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-warning mb-3">Project</h4>
                     <ul class="list-unstyled">
-                        <li><a href="{% url 'recipes' %}" class="text-decoration-none link-light">Recipes</a></li>
-                        <li><a href="{% url 'shopping_list' %}" class="text-decoration-none link-light">Quick Shopping List</a></li>
-                        <li><a href="{% url 'facts' %}" class="text-decoration-none link-light">Facts</a></li>
-                        <li><a href="{% url 'tips' %}" class="text-decoration-none link-light">Tips</a></li>
-                        <li><a href="{% url 'contact' %}" class="text-decoration-none link-light">Contact</a></li>
-                        <li><a href="{% url 'gallery' %}" class="text-decoration-none link-light">Gallery</a></li>
+                        <li class="mb-3">
+                            <div class="fw-semibold text-white mb-1">
+                                <i class="bi bi-github text-warning me-2"></i>GitHub Repository
+                            </div>
+                            <a href="https://github.com/charanepuri/sambar-handbook"
+                               target="_blank" rel="noopener noreferrer"
+                               class="text-decoration-none small text-warning-emphasis">
+                                github.com/charanepuri/sambar-handbook
+                            </a>
+                        </li>
+                        <li>
+                            <div class="fw-semibold text-white mb-1">
+                                <i class="bi bi-file-earmark-pdf-fill text-danger me-2"></i>Documentation
+                            </div>
+                            <a href="{{ MEDIA_URL }}Sambar%20Handbook.pdf"
+                               target="_blank" rel="noopener noreferrer"
+                               class="btn btn-sm btn-outline-warning mt-1">
+                                <i class="bi bi-download me-1"></i> View Sambar Handbook.pdf
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="col-md-4">
-                    <h4>👩‍💻 Developer</h4>
-                    <p class="mb-2">Developed by <strong>Charan Teja Epuri</strong></p>
-                    <ul class="list-unstyled">
+                <!-- Right Side: Connect & Portfolios -->
+                <div class="col-lg-4 col-md-12">
+                    <h4 class="text-warning mb-3">Connect</h4>
+                    <div class="mb-3">
+                        <a href="https://github.com/charanepuri"
+                           target="_blank" rel="noopener noreferrer"
+                           class="footer-social-link" title="GitHub">
+                            <i class="bi bi-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/charan-teja-972aa9231"
+                           target="_blank" rel="noopener noreferrer"
+                           class="footer-social-link" title="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
 
-                        <li>
-                            <a href="https://www.linkedin.com/in/charan-teja-972aa9231"
-                            target="_blank" rel="noopener noreferrer"
-                            class="text-white text-decoration-none">
-                                <i class="bi bi-linkedin"></i> 
-                                <!-- LinkedIn -->
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="https://github.com/charanepuri"
-                            target="_blank" rel="noopener noreferrer"
-                            class="text-white text-decoration-none">
-                                <i class="bi bi-github"></i>
-                                 <!-- GitHub -->
-                            </a>
-                        </li>
-
-                        <li>
+                    <h6 class="text-warning text-uppercase fw-semibold small mb-2">Explore Portfolios</h6>
+                    <ul class="list-unstyled row g-2">
+                        <li class="col-6">
                             <a href="https://portfolio-site-django.onrender.com"
-                            target="_blank" rel="noopener noreferrer"
-                            class="text-white text-decoration-none">
+                               target="_blank" rel="noopener noreferrer"
+                               class="text-white text-decoration-none small d-block">
                                 🌐 Django Portfolio
                             </a>
                         </li>
-
-                        <li>
+                        <li class="col-6">
                             <a href="https://charan-react-portfolio.vercel.app"
-                            target="_blank" rel="noopener noreferrer"
-                            class="text-white text-decoration-none">
+                               target="_blank" rel="noopener noreferrer"
+                               class="text-white text-decoration-none small d-block">
                                 ⚛️ React Portfolio
                             </a>
                         </li>
-
-                        <li>
+                        <li class="col-6">
                             <a href="https://flask-developer-dashboard-portfolio.onrender.com/"
-                            target="_blank" rel="noopener noreferrer"
-                            class="text-white text-decoration-none">
+                               target="_blank" rel="noopener noreferrer"
+                               class="text-white text-decoration-none small d-block">
                                 🧪 Flask Portfolio
                             </a>
                         </li>
-
+                        <li class="col-6">
+                            <a href="https://angular-portfolio-sigma-eight.vercel.app/"
+                               target="_blank" rel="noopener noreferrer"
+                               class="text-white text-decoration-none small d-block">
+                                🅰️ Angular Portfolio
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
             </div>
 
-            <hr class="text-secondary my-4">
+            <!-- Bottom Middle: Made with 💕 by Epuri Charan Teja -->
+            <hr class="border-secondary border-opacity-25 my-4">
+            <div class="text-center">
+                <p class="mb-0 text-white fs-6">
+                    Made with 💕 by <strong>Epuri Charan Teja</strong>
+                </p>
+            </div>
 
-            <p class="text-center mt-4">
-                © 2026 Sambar Handbook.
-                Developed by <strong>Charan Teja </strong>
-            </p>
         </div>
     </footer>
     

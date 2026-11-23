@@ -1,7 +1,8 @@
 {% extends 'handbook/base.html' %}
 
+{% block title %}Recipes - Sambar Handbook{% endblock %}
+
 {% block content %}
-<title>{% block title %}Recipes Page|| Sambar Handbook{% endblock %}</title>
     <h2>Recipes</h2>
 
     <!-- State Filtering Form -->
@@ -10,13 +11,16 @@
             <div class="col-md-4">
                 <select name="state" class="form-select">
                     <option value="">All States</option>
-                    {% for state in states %}
-                        <option value="{{ state.state }}">{{ state.state }}</option>
+                    {% for s in states %}
+                        <option value="{{ s.state }}" {% if s.state == selected_state %}selected{% endif %}>{{ s.state }}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-success">Filter</button>
+                {% if selected_state %}
+                    <a href="{% url 'recipes' %}" class="btn btn-outline-secondary">Reset</a>
+                {% endif %}
             </div>
         </div>
     </form>
@@ -27,7 +31,7 @@
 
             {% if recipes.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ recipes.previous_page_number }}">
+                    <a class="page-link" href="?page={{ recipes.previous_page_number }}{% if selected_state %}&state={{ selected_state }}{% endif %}">
                         Previous
                     </a>
                 </li>
@@ -41,7 +45,7 @@
 
             {% if recipes.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ recipes.next_page_number }}">
+                    <a class="page-link" href="?page={{ recipes.next_page_number }}{% if selected_state %}&state={{ selected_state }}{% endif %}">
                         Next
                     </a>
                 </li>

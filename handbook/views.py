@@ -62,8 +62,11 @@ def ingredients(request):
     )
 
 def recipes(request):
+    state_filter = request.GET.get('state')
+    recipe_list = Recipe.objects.select_related('state').all()
 
-    recipe_list = Recipe.objects.all()
+    if state_filter:
+        recipe_list = recipe_list.filter(state__state=state_filter)
 
     paginator = Paginator(
         recipe_list,
@@ -71,16 +74,18 @@ def recipes(request):
     )
 
     page_number = request.GET.get('page')
+    recipes = paginator.get_page(page_number)
 
-    recipes = paginator.get_page(
-        page_number
-    )
+    # Get distinct states for the dropdown filter
+    states = StateVariety.objects.values('state').distinct()
 
     return render(
         request,
         'handbook/recipes.html',
         {
-            'recipes': recipes
+            'recipes': recipes,
+            'states': states,
+            'selected_state': state_filter,
         }
     )
 
@@ -136,9 +141,6 @@ def gallery(request):
         context
     )
 
-def history(request):
-    return render(request, 'handbook/history.html')
-
 def facts(request):
 
     facts = Fact.objects.filter(
@@ -190,15 +192,18 @@ def variety_detail(request, id):
 
 
 def search(request):
-    query = request.GET.get('q')
+    query = request.GET.get('q', '').strip()
 
-    recipes = Recipe.objects.filter(
-        Q(title__icontains=query)
-    )
-
-    ingredients = Ingredient.objects.filter(
-        Q(name__icontains=query)
-    )
+    if query:
+        recipes = Recipe.objects.filter(
+            Q(title__icontains=query)
+        )
+        ingredients = Ingredient.objects.filter(
+            Q(name__icontains=query)
+        )
+    else:
+        recipes = Recipe.objects.none()
+        ingredients = Ingredient.objects.none()
 
     context = {
         'query': query,
@@ -213,6 +218,20 @@ def search(request):
     )
     
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name', '').strip()
+        email = request.POST.get('email', '').strip()
+        message = request.POST.get('message', '').strip()
+        
+        return render(
+            request,
+            'handbook/contact.html',
+            {
+                'success': True,
+                'name': name
+            }
+        )
+        
     return render(
         request,
         'handbook/contact.html'
@@ -221,41 +240,6 @@ def contact(request):
 def about(request):
     return render(request, 'handbook/about.html')
 
-
-def ingredients(request):
-    ingredients = Ingredient.objects.all()
-
-    return render(
-        request,
-        'handbook/ingredients.html',
-        {'ingredients': ingredients}
-    )
-
-
-def ingredient_detail(request, id):
-    ingredient = get_object_or_404(
-        Ingredient,
-        id=id
-    )
-
-    return render(
-        request,
-        'handbook/ingredient_detail.html',
-        {'ingredient': ingredient}
-    )
-
-def variety_detail(request, id):
-    variety = get_object_or_404(
-        StateVariety,
-        id=id
-    )
-
-    return render(
-        request,
-        'handbook/variety_detail.html',
-        {'variety': variety}
-    )
-    
 def shopping_list(request):
     return render(
         request,

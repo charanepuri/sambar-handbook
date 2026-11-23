@@ -1,8 +1,9 @@
 {% extends 'handbook/base.html' %}
+
+{% block title %}Home Page- Sambar Handbook{% endblock %}
 {% load static %}
 
 {% block content %}
-<title>{% block title %}Home Page|| Sambar Handbook{% endblock %}</title>
 <!-- Hero Section -->
 <div class="hero">
 
@@ -74,8 +75,7 @@
 
 <hr>
 
-<!-- Featured Recipes -->
-<h3 class="mb-4">Featured Recipes</h3>
+<h3 class="mb-4 section-header">Featured Recipes</h3>
 
 <div class="row g-4 mb-5">
 
@@ -91,29 +91,35 @@
                  alt="{{ recipe.title }}">
             {% endif %}
 
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
 
-                <h5>{{ recipe.title }}</h5>
+                <h5 class="card-title">{{ recipe.title }}</h5>
 
-                <span class="badge bg-success">
-                    {{ recipe.difficulty }}
-                </span>
+                <div>
+                    <span class="badge badge-tag">
+                        {{ recipe.difficulty }}
+                    </span>
+                    {% if recipe.state %}
+                    <span class="badge badge-spice ms-1">
+                        {{ recipe.state.state }}
+                    </span>
+                    {% endif %}
+                </div>
 
-                <p class="mt-3">
-                    <strong>Prep:</strong>
-                    {{ recipe.preparation_time }} mins
-                </p>
-
-                <p>
-                    <strong>Cook:</strong>
-                    {{ recipe.cooking_time }} mins
-                </p>
+                <div class="mt-3 text-muted small">
+                    <p class="mb-1">
+                        <i class="bi bi-clock me-1 text-warning"></i>
+                        <strong>Prep:</strong> {{ recipe.preparation_time }} mins
+                    </p>
+                    <p class="mb-0">
+                        <i class="bi bi-fire me-1 text-danger"></i>
+                        <strong>Cook:</strong> {{ recipe.cooking_time }} mins
+                    </p>
+                </div>
 
                 <a href="{% url 'recipe_detail' recipe.id %}"
-                   class="btn btn-outline-success">
-
-                    View Recipe
-
+                   class="btn btn-outline-success mt-auto pt-2">
+                    View Recipe <i class="bi bi-arrow-right ms-1"></i>
                 </a>
 
             </div>
@@ -135,33 +141,33 @@
 </div>
 
 <!-- Statistics Section -->
-<div class="row text-center mb-5">
+<div class="row text-center mb-5 g-4">
 
-    <div class="col-md-3">
-        <div class="card shadow p-4">
-            <h1>{{ recipe_count }}</h1>
-            <p class="text-muted">Recipes</p>
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-number">{{ recipe_count }}</div>
+            <div class="stat-label">Recipes</div>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card shadow p-4">
-            <h1>{{ ingredient_count }}</h1>
-            <p class="text-muted">Ingredients</p>
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-number">{{ ingredient_count }}</div>
+            <div class="stat-label">Ingredients</div>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card shadow p-4">
-            <h1>{{ variety_count }}</h1>
-            <p class="text-muted">Varieties</p>
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-number">{{ variety_count }}</div>
+            <div class="stat-label">Varieties</div>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card shadow p-4">
-            <h1>{{ fact_count }}</h1>
-            <p class="text-muted">Facts</p>
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-number">{{ fact_count }}</div>
+            <div class="stat-label">Facts</div>
         </div>
     </div>
 
